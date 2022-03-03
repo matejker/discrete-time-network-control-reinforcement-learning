@@ -4,7 +4,8 @@ from .binary_finite_field import BinaryFiniteField
 
 
 class FiniteField:
-    """ Unifying  BinaryFiniteField and FiniteField under one class """
+    """Unifying  BinaryFiniteField and FiniteField under one class"""
+
     def __init__(self, a: int, q: int) -> None:
         if q in PRIMES:
             self.__class__ = _FiniteField  # type: ignore
