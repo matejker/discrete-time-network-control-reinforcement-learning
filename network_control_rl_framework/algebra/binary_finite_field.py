@@ -57,6 +57,14 @@ class BinaryFiniteField:
     def __add__(self, other):
         return BinaryFiniteField(self.a ^ other.a, self.n)
 
+    # TODO: check if this is actually true...
+    def __sub__(self, other):
+        x = self.a - other.a
+
+        if x < 0:
+            x = self.n - x - 1
+        return BinaryFiniteField(x, self.n)
+
     def __mul__(self, other):
         degree_r = self.get_polynomial_degree() - 1
         prod = 0

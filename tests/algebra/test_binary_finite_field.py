@@ -22,6 +22,8 @@ def test_operations():
     b = BinaryFiniteField(3, 2)  # x+1
 
     assert (a + b).a == 1
+    assert (a - b).a == 2
+    assert (b - a).a == 1
     assert (a * b).a == 1
     assert (a / b).a == 3  # x + 1
     assert (~b).a == 2  # x

@@ -21,5 +21,4 @@ def test_finite_field_operations():
     assert (a * b).a == 2
     assert (a / b).a == 2
     assert (~a).a == 2
-    assert (a ** 3).a == 1
-    
+    assert (a**3).a == 1
