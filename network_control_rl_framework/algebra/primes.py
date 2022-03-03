@@ -1,0 +1,2 @@
+PRIMES = [2, 3, 5, 7, 11]
+IRR_POLYNOMIALS = [2, 7, 11, 19]
