@@ -9,23 +9,23 @@ class FiniteField:
         self.a = a
         self.p = p
 
-    def __add__(self, other: FiniteField) -> FiniteField:
+    def __add__(self, other):
         return FiniteField((self.a + other.a) % self.p, self.p)
 
-    def __pow__(self, power: int) -> FiniteField:
+    def __pow__(self, power: int):
         return FiniteField((self.a ^ power) % self.p, self.p)
 
-    def __mul__(self, other: FiniteField) -> FiniteField:
+    def __mul__(self, other):
         return FiniteField((self.a * other.a) % self.p, self.p)
 
-    def __sub__(self, other: FiniteField) -> FiniteField:
+    def __sub__(self, other):
         return FiniteField((self.a - other.a) % self.p, self.p)
 
     def __invert__(self):
         # However, a^(p^n - 1) = 1 in GF(p), therefore, inverse of a is a^(p^n - 2)
         return FiniteField((self.a ** (self.p - 2)) % self.p, self.p)
 
-    def __truediv__(self, other: FiniteField) -> FiniteField:
+    def __truediv__(self, other):
         binv = ~other
         return self * binv
 

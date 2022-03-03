@@ -54,7 +54,7 @@ class BinaryFiniteField:
 
         return degree
 
-    def __add__(self, other) -> BinaryFiniteField:
+    def __add__(self, other):
         return BinaryFiniteField(self.a ^ other.a, self.n)
 
     def __mul__(self, other):
@@ -91,7 +91,7 @@ class BinaryFiniteField:
     def __invert__(self):
         degr = self.get_polynomial_degree()
         power = (1 << degr) - 2
-        return self ** power
+        return self**power
 
     def __truediv__(self, other):
         binv = ~other
