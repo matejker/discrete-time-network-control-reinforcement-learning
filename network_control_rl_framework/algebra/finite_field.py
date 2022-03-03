@@ -6,7 +6,7 @@ class FiniteField:
         if p not in PRIMES:
             raise ValueError(f"{p} is either not a prime or it is too high, only {PRIMES} are allowed!")
 
-        self.a = a
+        self.a = a % p
         self.p = p
 
     def __add__(self, other):
