@@ -18,8 +18,8 @@ def test_incorrect_power_of_2():
 
 
 def test_operations():
-    a = BinaryFiniteField(2, 2)  # x
-    b = BinaryFiniteField(3, 2)  # x+1
+    a = BinaryFiniteField(2, 4)  # x
+    b = BinaryFiniteField(3, 4)  # x+1
 
     assert (a + b).a == 1
     assert (a - b).a == 2

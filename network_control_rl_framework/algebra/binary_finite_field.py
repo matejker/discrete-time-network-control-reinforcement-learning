@@ -1,11 +1,13 @@
-from .primes import IRR_POLYNOMIALS
+from math import log2
+
+from .primes import IRR_POLYNOMIALS, POWERS_2
 
 
 class BinaryFiniteField:
     """Basic arithmetic operations on finite fields or Galois field of order 2^n
     Params:
         - a (int) element of the 2^n set
-        - n (int) exponent
+        - p (int) prime factor
         - r (int): irreducible polynomial over GF(2^n)
     Example:
         GF(2^2):
@@ -30,14 +32,15 @@ class BinaryFiniteField:
         [1] John Kerl, (2004), "Computation in finite fields", https://johnkerl.org/doc/ffcomp.pdf
     """
 
-    def __init__(self, a: int, n: int, r: int = None) -> None:
+    def __init__(self, a: int, p: int, r: int = None) -> None:
         self.a = a
-        self.n = n
+        self.p = p
+        self.n = int(log2(p))
 
-        if n > len(IRR_POLYNOMIALS) or n == 0:
-            raise ValueError(f"Cannot evaluate finite field of order 2^{n}, expected value [1, {len(IRR_POLYNOMIALS)}]")
+        if p not in POWERS_2:
+            raise ValueError(f"Cannot evaluate finite field of order {p}, expected value {POWERS_2}")
 
-        self.r = r or IRR_POLYNOMIALS[n - 1]
+        self.r = r or IRR_POLYNOMIALS[self.n - 1]
 
     def print_polynomial(self) -> str:
         b = bin(self.r)[2:]
@@ -55,9 +58,8 @@ class BinaryFiniteField:
         return degree
 
     def __add__(self, other):
-        return BinaryFiniteField(self.a ^ other.a, self.n)
+        return BinaryFiniteField(self.a ^ other.a, self.p)
 
-    # TODO: check if this is actually true...
     def __sub__(self, other):
         x = self.a - other.a
 
@@ -82,11 +84,11 @@ class BinaryFiniteField:
             else:
                 temp_a <<= 1
 
-        return BinaryFiniteField(prod, self.n)
+        return BinaryFiniteField(prod, self.p)
 
     def __pow__(self, power: int):
         a2 = self
-        prod = BinaryFiniteField(1, self.n)
+        prod = BinaryFiniteField(1, self.p)
 
         while power != 0:
             if power & 1:
