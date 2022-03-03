@@ -2,6 +2,22 @@ from .primes import PRIMES
 
 
 class FiniteField:
+    """Basic arithmetic operations on finite fields over a prime
+    Params:
+        - a (int) element
+        - p (int) prime
+
+    Example:
+        GF(p):
+
+         >> a = FiniteField(2, 5)
+         >> b = FiniteField(3, 5)
+         >> a + b # 0
+         >> a * b # 1
+         >> a / b # 1
+         >> ~b  # (inverse of b) 2
+    """
+
     def __init__(self, a: int, p: int) -> None:
         if p not in PRIMES:
             raise ValueError(f"{p} is either not a prime or it is too high, only {PRIMES} are allowed!")
