@@ -2,7 +2,7 @@ from .primes import IRR_POLYNOMIALS
 
 
 class BinaryFiniteField:
-    """ Basic arithmetic operations on finite fields or Galois field of order 2^n
+    """Basic arithmetic operations on finite fields or Galois field of order 2^n
     Params:
         - a (int) element of the 2^n set
         - n (int) exponent
@@ -19,6 +19,7 @@ class BinaryFiniteField:
           x | x   | x+1 | 0   | 1   |     x | 0   | x   | x+1 | 1   |
         ----+-----+-----+-----+-----+   ----+-----+-----+-----+-----+
          x+1| x+1 | x   | 1   | 0   |    x+1| 0   | x+1 | 1   | x   |
+
          >> a = BinaryFiniteField(2, 2) # x
          >> b = BinaryFiniteField(3, 2) # x+1
          >> a + b # 1

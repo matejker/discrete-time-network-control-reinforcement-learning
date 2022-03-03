@@ -2,24 +2,32 @@ from .primes import PRIMES
 
 
 class FiniteField:
-    def __init__(self, a: int, n: int) -> None:
-        if n not in PRIMES:
-            raise ValueError(f"{n} is either not a prime or it is too high, only {PRIMES} are allowed!")
+    def __init__(self, a: int, p: int) -> None:
+        if p not in PRIMES:
+            raise ValueError(f"{p} is either not a prime or it is too high, only {PRIMES} are allowed!")
 
         self.a = a
-        self.n = n
+        self.p = p
 
     def __add__(self, other: FiniteField) -> FiniteField:
-        return FiniteField((self.a + other.a) % self.n, self.n)
+        return FiniteField((self.a + other.a) % self.p, self.p)
 
     def __pow__(self, power: int) -> FiniteField:
-        return FiniteField((self.a ^ power) % self.n, self.n)
+        return FiniteField((self.a ^ power) % self.p, self.p)
 
     def __mul__(self, other: FiniteField) -> FiniteField:
-        return FiniteField((self.a * other.a) % self.n, self.n)
+        return FiniteField((self.a * other.a) % self.p, self.p)
 
     def __sub__(self, other: FiniteField) -> FiniteField:
-        return FiniteField((self.a - other.a) % self.n, self.n)
+        return FiniteField((self.a - other.a) % self.p, self.p)
+
+    def __invert__(self):
+        # However, a^(p^n - 1) = 1 in GF(p), therefore, inverse of a is a^(p^n - 2)
+        return FiniteField((self.a ** (self.p - 2)) % self.p, self.p)
+
+    def __truediv__(self, other: FiniteField) -> FiniteField:
+        binv = ~other
+        return self * binv
 
     def __repr__(self):
         return str(self.a)

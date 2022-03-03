@@ -1,2 +1,3 @@
 PRIMES = [2, 3, 5, 7, 11]
+POWERS_2 = [2, 4, 8, 16]
 IRR_POLYNOMIALS = [2, 7, 11, 19]
