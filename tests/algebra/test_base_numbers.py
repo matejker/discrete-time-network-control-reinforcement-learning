@@ -1,4 +1,5 @@
 import pytest
+import numpy as np
 
 from network_control_rl_framework.algebra import BaseNumber
 
@@ -36,3 +37,13 @@ def test_base_number_operations_with_different_bases_and_sizes():
         b = BaseNumber(3, 3, 1)
 
         a + b
+
+
+def test_base_number_array_convert():
+    a = BaseNumber(3, 2, 5)
+    assert (a.to_array() == np.array([1, 0, 1], dtype=np.int8)).all()
+
+    a.from_array(np.array([1, 0, 0, 0], dtype=np.int8))
+    assert a.a == 8
+    assert a.n == 4
+    assert a.q == 2

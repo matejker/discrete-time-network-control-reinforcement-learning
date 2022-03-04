@@ -32,7 +32,7 @@ class BaseNumber:
         self.a = self.convert_array_to_decimal(array, self.q)
 
     def to_array(self) -> np.ndarray:
-        array = np.zeros(self.n)
+        array = np.zeros(self.n, dtype=np.int8)
         temp_number = self.a
 
         for i in reversed(range(self.n)):
