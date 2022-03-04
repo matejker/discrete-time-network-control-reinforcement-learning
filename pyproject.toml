@@ -7,6 +7,7 @@ authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 notebook = "^6.4.8"
+numpy = "^1.22.2"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
