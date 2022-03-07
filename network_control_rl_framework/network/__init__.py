@@ -1,1 +1,2 @@
 from .network import Network, WeightNetwork
+from .configuration_models import erdos_renyi_random_network, barabasi_albert_preferential_attachment_network
