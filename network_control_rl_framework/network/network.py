@@ -5,7 +5,7 @@ from network_control_rl_framework.utils import is_int, is_float
 class Network:
     @staticmethod
     def get_edge_basket(edges: List[Tuple], weighted: bool = False) -> Dict:
-        basket = dict()
+        basket: Dict = dict()
 
         if weighted:
             for i, j, w in edges:
