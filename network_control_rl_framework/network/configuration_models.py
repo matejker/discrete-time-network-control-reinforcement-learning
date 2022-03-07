@@ -3,12 +3,17 @@ from typing import Optional
 from itertools import combinations, product
 
 from .network import Network
+from network_control_rl_framework.utils import random_choice
 
 
-def erdos_renyi_random_network(n: int, p: float = 0.1, seed: Optional[int] = None) -> Network:
+def erdos_renyi_random_network(
+    n: int, p: float = 0.1, seed: Optional[int] = None, ignore_self_loops: bool = True
+) -> Network:
     if seed:
         np.random.seed(seed)
-    edges = [e for e in product(ranger(n), repeat=2) if np.random.random() < p]
+    edges = [
+        e for e in product(range(n), repeat=2) if np.random.random() < p and (e[0] != e[1] or not ignore_self_loops)
+    ]
 
     return Network(edges=edges, n=n)
 
@@ -16,7 +21,7 @@ def erdos_renyi_random_network(n: int, p: float = 0.1, seed: Optional[int] = Non
 def barabasi_albert_preferential_attachment_network(
     n: int, m: int, m0: Optional[int] = None, seed: Optional[int] = None
 ) -> Network:
-    """Barabasi-Albert model [2]
+    """Barabasi-Albert model [2], generate a random choice of given size with no repeating.
     Args:
         - n (integer): number of network nodes
         - m (integer): number of new edges from newly added node
