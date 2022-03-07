@@ -26,7 +26,7 @@ def random_choice(seq, size: int = 2):
     Returns:
         Set of random elements of given size
     """
-    targets = set()
+    targets: set = set()
 
     while len(targets) < size:
         x = np.random.choice(seq)

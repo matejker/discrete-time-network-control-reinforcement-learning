@@ -74,4 +74,4 @@ def barabasi_albert_preferential_attachment_network(
                 edges.append((r, c))
         nodes_basket.extend(rm + connections)
 
-    return Network(edges=edges, n=n)
+    return Network(edges=edges, n=n)  # type: ignore
