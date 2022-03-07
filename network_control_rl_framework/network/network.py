@@ -1,20 +1,5 @@
-from typing import Any, List, Tuple, Optional, Union, Dict
-
-
-def is_int(number: Any) -> bool:
-    try:
-        int(number)
-        return True
-    except TypeError:
-        return False
-
-
-def is_float(number: Any) -> bool:
-    try:
-        float(number)
-        return True
-    except TypeError:
-        return False
+from typing import List, Tuple, Dict
+from network_control_rl_framework.utils import is_int, is_float
 
 
 class Network:
@@ -35,7 +20,7 @@ class Network:
         self.edges = set(edges)
         self.edge_basket = self.get_edge_basket(edges)
 
-    def from_edges(self, edges: List[Typle]):
+    def from_edges(self, edges: List[Tuple]):
         max_node = 0
 
         for i, j in edges:
@@ -57,7 +42,7 @@ class WeightNetwork(Network):
     def __init__(self, edges: List[Tuple] = [], n: int = 0):
         super().__init__(edges, n)
 
-    def from_edges(self, edges: List[Typle]):
+    def from_edges(self, edges: List[Tuple]):
         max_node = 0
 
         for i, j, w in edges:
