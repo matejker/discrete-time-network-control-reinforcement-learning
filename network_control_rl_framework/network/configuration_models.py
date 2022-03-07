@@ -9,6 +9,17 @@ from network_control_rl_framework.utils import random_choice
 def erdos_renyi_random_network(
     n: int, p: float = 0.1, seed: Optional[int] = None, ignore_self_loops: bool = True
 ) -> Network:
+    """Erdos-Renyi random network [1]
+    Args:
+        - n (integer): number of network nodes
+        - p (float): probability of link existence
+        - seed=None (integer): numpy.random.seed (integer between 0 and 2**32 - 1 inclusive) [1]
+    Returns:
+        A Network object.
+    References:
+        [1] Newman, M. E. J. (2010), Networks: an introduction,
+        Oxford University Press, Oxford; New York
+    """
     if seed:
         np.random.seed(seed)
     edges = [
