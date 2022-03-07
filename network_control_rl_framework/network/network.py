@@ -45,7 +45,7 @@ class Network:
         self.edge_basket = self.get_edge_basket(edges)
 
 
-class WeightNetwork(Network):
+class WeightedNetwork(Network):
     def __init__(self, edges: List[Tuple] = [], n: int = 0):
         super().__init__(edges, n)
 

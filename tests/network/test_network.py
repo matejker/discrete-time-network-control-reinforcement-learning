@@ -1,6 +1,6 @@
 import pytest
 
-from network_control_rl_framework.network import Network, WeightNetwork
+from network_control_rl_framework.network import Network, WeightedNetwork
 
 
 def test_network():
@@ -16,7 +16,7 @@ def test_network():
 
 
 def test_weight_network():
-    network = WeightNetwork()
+    network = WeightedNetwork()
     assert network.edges == set()
     assert network.nodes == 0
     assert network.edge_basket == dict()
@@ -34,4 +34,4 @@ def test_network_non_int_nodes():
 
 def test_weight_network_not_float():
     with pytest.raises(ValueError):
-        WeightNetwork(edges=[(3, 2, "ipsum")])
+        WeightedNetwork(edges=[(3, 2, "ipsum")])
