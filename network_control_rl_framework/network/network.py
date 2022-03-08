@@ -34,11 +34,11 @@ class Network:
         max_node = 0
 
         for i, j in edges:
-            if max_node < i:
-                max_node = i
+            if max_node - 1 < i:
+                max_node = i + 1
 
-            if max_node < j:
-                max_node = j
+            if max_node - 1 < j:
+                max_node = j + 1
 
         self.nodes = max_node
         self.edges = set(edges)
@@ -53,11 +53,11 @@ class WeightedNetwork(Network):
         max_node = 0
 
         for i, j, _ in edges:
-            if max_node < i:
-                max_node = i
+            if max_node - 1 < i:
+                max_node = i + 1
 
-            if max_node < j:
-                max_node = j
+            if max_node - 1 < j:
+                max_node = j + 1
 
         self.nodes = max_node
         self.edges = set(edges)

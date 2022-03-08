@@ -14,6 +14,9 @@ def calculate_next_state(
 ) -> np.ndarray:
     n = len(x)
 
+    if n != network.nodes:
+        raise ValueError(f"Length of state vector x and number of nodes doesn't match, {n}!={network.nodes}")
+
     new_x = np.zeros(n, dtype=np.int8)
     for node, neighbours in network.edge_basket.items():
         for neighbour in neighbours:
@@ -31,6 +34,10 @@ def calculate_next_state_base_number(
     n = number.n
     q = number.q
     x = number.to_array()
+
+    if n != network.nodes:
+        raise ValueError(f"Length of state vector x and number of nodes doesn't match, {n}!={network.nodes}")
+
     new_x = np.zeros(n, dtype=np.int8)
     for node, neighbours in network.edge_basket.items():
         for neighbour in neighbours:
