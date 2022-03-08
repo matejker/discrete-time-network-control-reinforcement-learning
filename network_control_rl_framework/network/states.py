@@ -20,10 +20,10 @@ def calculate_next_state(
     new_x = np.zeros(n, dtype=np.int8)
     for node, neighbours in network.edge_basket.items():
         for neighbour in neighbours:
-            new_x[neighbour] = (FiniteField(x[node], q) + FiniteField(new_x[neighbour], q)).a
+            new_x[neighbour] = (FiniteField(x[node], q) + FiniteField(new_x[neighbour], q)).a  # type: ignore
 
     for i, b in enumerate(signals):
-        new_x[input_matrix[i]] = (FiniteField(new_x[input_matrix[i]], q) + FiniteField(b, q)).a
+        new_x[input_matrix[i]] = (FiniteField(new_x[input_matrix[i]], q) + FiniteField(b, q)).a  # type: ignore
 
     return new_x
 
@@ -41,10 +41,10 @@ def calculate_next_state_base_number(
     new_x = np.zeros(n, dtype=np.int8)
     for node, neighbours in network.edge_basket.items():
         for neighbour in neighbours:
-            new_x[neighbour] = (FiniteField(x[node], q) + FiniteField(new_x[neighbour], q)).a
+            new_x[neighbour] = (FiniteField(x[node], q) + FiniteField(new_x[neighbour], q)).a  # type: ignore
 
-    for i, b in enumerate(signals):
-        new_x[input_matrix[i]] = (FiniteField(new_x[input_matrix[i]], q) + FiniteField(b, q)).a
+    for i, b in enumerate(signals.to_array()):
+        new_x[input_matrix[i]] = (FiniteField(new_x[input_matrix[i]], q) + FiniteField(b, q)).a  # type: ignore
 
     new_number = BaseNumber(n, q)
     new_number.from_array(new_x)
