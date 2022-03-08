@@ -14,7 +14,7 @@ class BaseNumber:
         if q not in POSSIBLE_BASES:
             raise ValueError(f"Cannot evaluate finite field of order {q}, expected value {POSSIBLE_BASES}")
 
-        if n < log2(a) / log2(q):
+        if a > 0 and n < log2(a) / log2(q):
             raise ValueError(
                 f"Number {a} in {q} base is larger than number of position {n}, max possible value {q ** n - 1}"
             )

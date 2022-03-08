@@ -10,7 +10,7 @@ def test_network():
     assert network.edge_basket == dict()
 
     network.from_edges([(1, 2), (0, 3), (5, 4)])
-    assert network.nodes == 5
+    assert network.nodes == 6
     assert network.edges == {(1, 2), (0, 3), (5, 4)}
     assert network.edge_basket == {1: [2], 0: [3], 5: [4]}
 
@@ -22,7 +22,7 @@ def test_weight_network():
     assert network.edge_basket == dict()
 
     network.from_edges([(1, 2, 0.5), (0, 3, 0.1), (5, 4, 20)])
-    assert network.nodes == 5
+    assert network.nodes == 6
     assert network.edges == {(1, 2, 0.5), (0, 3, 0.1), (5, 4, 20)}
     assert network.edge_basket == {1: [(2, 0.5)], 0: [(3, 0.1)], 5: [(4, 20)]}
 

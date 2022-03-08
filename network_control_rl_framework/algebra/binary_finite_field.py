@@ -60,6 +60,9 @@ class BinaryFiniteField:
     def __add__(self, other):
         return BinaryFiniteField(self.a ^ other.a, self.p)
 
+    def __radd__(self, other):
+        return other + self
+
     def __sub__(self, other):
         x = self.a - other.a
 

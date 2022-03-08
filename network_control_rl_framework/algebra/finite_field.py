@@ -28,6 +28,9 @@ class FiniteField:
     def __add__(self, other):
         return FiniteField((self.a + other.a) % self.p, self.p)
 
+    def __radd__(self, other):
+        return other + self
+
     def __pow__(self, power: int):
         return FiniteField((self.a ^ power) % self.p, self.p)
 
