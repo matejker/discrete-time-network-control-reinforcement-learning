@@ -3,7 +3,7 @@ from math import log2
 from .primes import PRIMES, POWERS_2
 from .finite_field import FiniteField as _FiniteField
 from .binary_finite_field import BinaryFiniteField
-from .base_numbers import BaseNumber
+from .base_numbers import BaseNumber, DIGITS
 
 
 class FiniteField:
