@@ -28,4 +28,5 @@ def test_random_action_base_number():
 
 def test_random_action_exceptions():
     with raises(ValueError):
+        # Either `q` and `n` or `base` needs to be specify.
         random_action(1)
