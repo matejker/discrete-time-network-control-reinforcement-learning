@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Optional
+from typing import Any, Optional, Tuple, Dict
 
 from network_control_rl_framework.network import Network
 from network_control_rl_framework.rl.model import RLModel
@@ -38,7 +38,19 @@ class QLearning(RLModel):
         self.epsilon = epsilon
         self.gamma = gamma
         self.alpha = alpha
-        self.q_dict = {}
+        self.q_dict: Dict[Any, Any] = {-1: {}}  # TODO: fix typing
+
+    def get_best_action_for_state(self, state: BaseNumber) -> Tuple[int, float]:
+        max_value: float = -1.0
+        best_action: int = -1
+
+        already_explored_actions = self.q_dict.get(state, {})
+        for action, value in already_explored_actions.items():
+            if value > max_value:
+                max_value = value
+                best_action = action
+
+        return best_action, max_value
 
     def train(self):
         random_explore_vec = np.random.rand(size=self.num_episodes) < self.epsilon
