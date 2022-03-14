@@ -40,7 +40,10 @@ class QLearning(RLModel):
         self.alpha = alpha
         self.q_dict: Dict[Any, Any] = {-1: {}}  # TODO: fix typing
 
-    def get_best_action_for_state(self, state: BaseNumber) -> Tuple[int, float]:
+    def get_best_action_for_state(self, state: BaseNumber, seed: Optional[int] = None) -> Tuple[int, float]:
+        if seed:
+            np.random.seed(seed)
+
         max_value: float = -1.0
         best_action: int = -1
 
@@ -52,7 +55,7 @@ class QLearning(RLModel):
 
         return best_action, max_value
 
-    def train(self):
+    def train(self, seed: Optional[int] = None):
         random_explore_vec = np.random.rand(size=self.num_episodes) < self.epsilon
         for t in range(self.num_episodes):
             # Explore
