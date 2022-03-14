@@ -12,6 +12,8 @@ class RLModel:
         initial_state: BaseNumber,
         end_state: BaseNumber,
         network: Network,
+        num_episodes: Optional[int] = None,
+        episodes_factor: Optional[float] = None,
         max_iteration: Optional[int] = None,
         iteration_factor: Optional[float] = None,
     ) -> None:
@@ -38,6 +40,15 @@ class RLModel:
             self.max_iteration = max_iteration
 
         if not self.max_iteration:
+            raise ValueError()
+
+        if episodes_factor:
+            self.num_episodes = int(network.nodes * episodes_factor)
+
+        if num_episodes:
+            self.num_episodes = num_episodes
+
+        if not self.num_episodes:
             raise ValueError()
 
     def train(self):

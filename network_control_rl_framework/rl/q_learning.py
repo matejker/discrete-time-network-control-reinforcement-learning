@@ -13,13 +13,17 @@ class QLearning(RLModel):
         initial_state: BaseNumber,
         end_state: BaseNumber,
         network: Network,
+        num_episodes: Optional[int] = None,
+        episodes_factor: Optional[float] = None,
         max_iteration: Optional[int] = None,
         iteration_factor: Optional[float] = None,
         epsilon: float = 0.01,
         gamma: float = 0.99,
         alpha: float = 0.5,
     ):
-        RLModel.__init__(self, initial_state, end_state, network, max_iteration, iteration_factor)
+        RLModel.__init__(
+            self, initial_state, end_state, network, num_episodes, episodes_factor, max_iteration, iteration_factor
+        )
 
         # TODO: add docs
         self.epsilon = epsilon
