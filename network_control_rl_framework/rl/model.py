@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Optional
+from typing import Optional, Dict
 
 from network_control_rl_framework.network import Network
 from network_control_rl_framework.rl import random_action
@@ -12,6 +12,7 @@ class RLModel:
         initial_state: BaseNumber,
         end_state: BaseNumber,
         network: Network,
+        input_matrix: Dict[int, int],
         num_episodes: Optional[int] = None,
         episodes_factor: Optional[float] = None,
         max_iteration: Optional[int] = None,
@@ -19,6 +20,8 @@ class RLModel:
     ) -> None:
         self.initial_state = initial_state.to_array()
         self.end_state = end_state.to_array()
+        self.input_matrix = input_matrix
+        self.m = len(initial_state)  # Number of driver nodes
 
         if initial_state.q != end_state.q:
             raise ValueError(
@@ -32,6 +35,9 @@ class RLModel:
                 f"Size of network, initial and end state has to be the same, "
                 f"{network.nodes=}, {initial_state.n=}, {end_state.n=}"
             )
+
+        self.q = self.initial_state.q
+        self.n = self.initial_state.n
 
         if iteration_factor:
             self.max_iteration = int(network.nodes * iteration_factor)

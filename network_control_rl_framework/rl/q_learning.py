@@ -13,6 +13,7 @@ class QLearning(RLModel):
         initial_state: BaseNumber,
         end_state: BaseNumber,
         network: Network,
+        input_matrix: Dict[int, int],
         num_episodes: Optional[int] = None,
         episodes_factor: Optional[float] = None,
         max_iteration: Optional[int] = None,
@@ -22,13 +23,30 @@ class QLearning(RLModel):
         alpha: float = 0.5,
     ):
         RLModel.__init__(
-            self, initial_state, end_state, network, num_episodes, episodes_factor, max_iteration, iteration_factor
+            self,
+            initial_state,
+            end_state,
+            network,
+            input_matrix,
+            num_episodes,
+            episodes_factor,
+            max_iteration,
+            iteration_factor,
         )
 
         # TODO: add docs
         self.epsilon = epsilon
         self.gamma = gamma
         self.alpha = alpha
+        self.q_dict = {}
 
     def train(self):
-        pass
+        random_explore_vec = np.random.rand(size=self.num_episodes) < self.epsilon
+        for t in range(self.num_episodes):
+            # Explore
+            if random_explore_vec[t]:
+                next_action: BaseNumber = random_action(self.m, self.q)
+
+            # Exploit
+            else:
+                pass

@@ -13,6 +13,7 @@ class Sarsa(RLModel):
         initial_state: BaseNumber,
         end_state: BaseNumber,
         network: Network,
+        input_matrix: Dict[int, int],
         num_episodes: Optional[int] = None,
         episodes_factor: Optional[float] = None,
         max_iteration: Optional[int] = None,
@@ -22,7 +23,15 @@ class Sarsa(RLModel):
         alpha: float = 0.5,
     ):
         RLModel.__init__(
-            self, initial_state, end_state, network, num_episodes, episodes_factor, max_iteration, iteration_factor
+            self,
+            initial_state,
+            end_state,
+            network,
+            input_matrix,
+            num_episodes,
+            episodes_factor,
+            max_iteration,
+            iteration_factor,
         )
 
         # TODO: add docs
