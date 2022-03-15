@@ -102,7 +102,7 @@ class QLearning(RLModel):
         states: List[BaseNumber] = [self.initial_state]
         signals = []
         if vector:
-            u = np.zeros((self.time_horizon, self.m))
+            u = np.zeros((self.time_horizon, self.m), dtype=np.int8)
 
         for t in range(self.time_horizon):
             action, state, _ = self.get_best_action_for_state(states[t])
