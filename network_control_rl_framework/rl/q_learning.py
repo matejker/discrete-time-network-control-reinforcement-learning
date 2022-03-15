@@ -82,4 +82,3 @@ class QLearning(RLModel):
 
                 if reward:
                     break
-    
