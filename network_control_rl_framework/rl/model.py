@@ -18,8 +18,8 @@ class RLModel:
         max_iteration: Optional[int] = None,
         iteration_factor: Optional[float] = None,
     ) -> None:
-        self.initial_state = initial_state.to_array()
-        self.end_state = end_state.to_array()
+        self.initial_state = initial_state
+        self.end_state = end_state
         self.input_matrix = input_matrix
         self.m: int = len(input_matrix)  # Number of driver nodes
 
@@ -30,6 +30,8 @@ class RLModel:
             )
 
         self.network = network
+        self.time_horizon = network.nodes
+
         if network.nodes != initial_state.n or initial_state.n != end_state.n or end_state.n != network.nodes:
             raise ValueError(
                 f"Size of network, initial and end state has to be the same, "

@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Any, Optional, Tuple, Dict
+from typing import Any, Optional, Tuple, Dict, Union, List
 
 from network_control_rl_framework.network import Network, calculate_next_state_base_number
 from network_control_rl_framework.rl.model import RLModel
@@ -47,7 +47,7 @@ class QLearning(RLModel):
         next_state = state
 
         np.random.shuffle(self.all_possible_action)
-        for action in all_possible_action:
+        for action in self.all_possible_action:
             temp_state = calculate_next_state_base_number(self.network, state, action, self.input_matrix)
             value = self.q_dict.get(temp_state, {}).get(action, 0.1)
 
@@ -74,11 +74,36 @@ class QLearning(RLModel):
                 if np.random.rand() < self.epsilon:
                     next_action: BaseNumber = random_action(self.m, self.q)
 
-                reward = (next_state.a == self.end_state.a) * 1  # TODO: add BaseNumber equality __equal__
+                reward = (next_state == self.end_state) * 1
                 self.q_dict[state][action] = min(value + self.alpha * (reward + self.gamma * max_value - value), 1)
 
                 state = next_state
                 action = next_action
 
                 if reward:
+                    if t + 1 < self.time_horizon:
+                        self.time_horizon = t + 1
                     break
+
+    def get_signals(self, vector: bool = False) -> Union[List[BaseNumber], np.ndarray]:
+        if len(self.q_dict) < 2:
+            raise ValueError("Tabular values Q are empty, you need to train() the model first.")
+
+        # TODO: rewrite it into np.ndarray
+        states: List[BaseNumber] = [self.initial_state]
+        signals = []
+        if vector:
+            u = np.zeros(size=(self.time_horizon, self.m))
+
+        for t in range(1, self.time_horizon):
+            action, state, _ = self.get_best_action_for_state(states[t])
+            states.append(state)
+            signals.append(action)
+
+            if vector:
+                u[t] = action.to_array()
+
+        if vector:
+            return u
+        else:
+            return signals
