@@ -24,5 +24,6 @@ def random_action(
     random_integers = np.random.randint(0, q, size=n)
     if vector:
         return random_integers
+
     number = "".join([DIGITS[i] for i in random_integers])
     return BaseNumber(n, q, int(number, q))  # type: ignore
