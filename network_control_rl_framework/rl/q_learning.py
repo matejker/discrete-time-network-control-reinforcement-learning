@@ -1,10 +1,11 @@
 import numpy as np
 from typing import Any, Optional, Tuple, Dict, Union, List
 
-from network_control_rl_framework.network import Network, calculate_next_state_base_number
 from network_control_rl_framework.rl.model import RLModel
-from network_control_rl_framework.rl.policy import random_action
 from network_control_rl_framework.algebra import BaseNumber
+from network_control_rl_framework.rl.policy import random_action
+from network_control_rl_framework.progress_bar import progress_bar_simple
+from network_control_rl_framework.network import Network, calculate_next_state_base_number
 
 
 class QLearning(RLModel):
@@ -63,8 +64,10 @@ class QLearning(RLModel):
         if seed:
             np.random.seed(seed)
 
-        # TODO: Use progress bar
-        for _ in range(self.num_episodes):
+        coef = max(self.n // 10, 1)
+        progress_bar_simple(0, self.num_episodes, prefix="Training:", suffix="Complete", length=50)
+
+        for eps in range(self.num_episodes):
             state = self.initial_state
             action = BaseNumber(self.m, self.q)
 
@@ -86,6 +89,10 @@ class QLearning(RLModel):
                     if t + 1 < self.time_horizon:
                         self.time_horizon = t + 1
                     break
+
+            if eps % coef == 0:
+                progress_bar_simple(eps, self.num_episodes, prefix="Progress:", suffix="Complete", length=50)
+        progress_bar_simple(self.num_episodes, self.num_episodes, prefix="Progress:", suffix="Complete", length=50)
 
     def get_signals(self, vector: bool = False) -> Union[List[BaseNumber], np.ndarray]:
         if len(self.q_dict) < 2:
