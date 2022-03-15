@@ -115,3 +115,13 @@ class BinaryFiniteField:
 
     def __str__(self):
         return f"BinaryFiniteField({self.a}, {self.n}) GF(2^{self.n}) ≃ Z_2 / <{self.print_polynomial()}>"
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, int):
+            return self.a == other
+        elif hasattr(other, "a"):
+            return self.a == other.a
+        return False
+
+    def __ne__(self, other) -> bool:
+        return not self == other
