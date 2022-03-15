@@ -65,3 +65,13 @@ class BaseNumber:
         a = self.to_array()
         b = other.to_array()
         return BaseNumber(self.n, self.q, self.convert_array_to_decimal((a - b) % self.q, self.q))
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, int):
+            return self.a == other
+        elif hasattr(other, "a"):
+            return self.a == other.a
+        return False
+
+    def __ne__(self, other) -> bool:
+        return not self == other

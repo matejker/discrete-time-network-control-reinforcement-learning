@@ -53,3 +53,13 @@ class FiniteField:
 
     def __str__(self):
         return f"FiniteField({self.a}, {self.n}) Z_{self.n}"
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, int):
+            return self.a == other
+        elif hasattr(other, "a"):
+            return self.a == other.a
+        return False
+
+    def __ne__(self, other) -> bool:
+        return not self == other

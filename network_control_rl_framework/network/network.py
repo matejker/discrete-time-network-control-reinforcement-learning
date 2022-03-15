@@ -12,6 +12,7 @@ class Network:
                 if not is_int(i) or not is_int(j):
                     raise ValueError(f"Nodes have to be integers, ({i}, {j}) are not")
 
+                # TODO: this is not float, this has to be element of a finite field
                 if not is_float(w):
                     raise ValueError(f"Weight has to be float, {w} is not")
 

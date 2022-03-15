@@ -18,9 +18,9 @@ def test_base_number_operations():
     a = BaseNumber(3, 2, 5)  # 101
     b = BaseNumber(3, 2, 6)  # 110
 
-    assert (a + b).a == 3  # 011
-    assert (a - b).a == 3  # 011
-    assert (b - a).a == 3  # 011
+    assert (a + b) == 3  # 011
+    assert (a - b) == 3  # 011
+    assert (b - a) == 3  # 011
 
 
 def test_base_number_operations_with_different_bases_and_sizes():
