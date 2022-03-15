@@ -39,10 +39,10 @@ def test_rl_model_object_init_exception(network_cycle_4):
         RLModel(initial_state, end_state, network_cycle_4, input_matrix, episodes_factor=13, iteration_factor=2)
 
     # Sizes don't match
-    initial_state = BaseNumber(n, q - 1)
+    initial_state = BaseNumber(n, q)
     initial_state.from_array(np.array([1, 2, 0, 1]))
-    end_state = BaseNumber(n, q)
-    end_state.from_array(np.array([1, 3, 2, 1]))
+    end_state = BaseNumber(n + 1, q)
+    end_state.from_array(np.array([1, 3, 2, 1, 2]))
 
     with raises(ValueError):
         RLModel(initial_state, end_state, network_cycle_4, input_matrix, episodes_factor=13, iteration_factor=2)
