@@ -3,29 +3,6 @@ from pytest import raises
 
 from network_control_rl_framework.rl import QLearning
 from network_control_rl_framework.algebra import BaseNumber
-from network_control_rl_framework.network import Network
-
-
-def test_q_learning_object_init():
-    network = Network()
-    network.from_edges([(0, 1), (1, 2), (2, 3)])  # 4 node line network (directed path)
-
-    input_matrix = {0: 0}
-    q = 4
-    n = network.nodes
-
-    initial_state = BaseNumber(n, q)
-    initial_state.from_array(np.array([1, 2, 3, 1]))
-    end_state = BaseNumber(n, q)
-    end_state.from_array(np.array([1, 3, 2, 1]))
-
-    model = QLearning(initial_state, end_state, network, input_matrix, episodes_factor=13, iteration_factor=2)
-
-    assert model.q == q
-    assert model.n == n
-    assert model.m == 1
-    assert model.max_iteration == 8
-    assert model.num_episodes == 52
 
 
 def test_q_learning_training(network_cycle_4):
