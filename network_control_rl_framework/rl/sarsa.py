@@ -1,10 +1,11 @@
-import numpy as np
+# import numpy as np
 from typing import Optional, Dict
 
 from network_control_rl_framework.network import Network
 from network_control_rl_framework.rl.model import RLModel
-from network_control_rl_framework.rl.policy import random_action
 from network_control_rl_framework.algebra import BaseNumber
+
+# from network_control_rl_framework.rl.policy import random_action
 
 
 class Sarsa(RLModel):

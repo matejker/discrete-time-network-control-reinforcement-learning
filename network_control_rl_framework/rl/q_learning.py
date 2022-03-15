@@ -39,7 +39,7 @@ class QLearning(RLModel):
         self.gamma = gamma
         self.alpha = alpha
         self.q_dict: Dict[Any, Any] = {-1: {}}  # TODO: fix typing
-        self.all_possible_action = np.arange(self.q ** self.m)  # TODO: can we do better?
+        self.all_possible_action = np.arange(self.q**self.m)  # TODO: can we do better?
 
     def get_best_action_for_state(self, state: BaseNumber) -> Tuple[BaseNumber, BaseNumber, float]:
         max_value: float = -1.0
@@ -62,17 +62,18 @@ class QLearning(RLModel):
         if seed:
             np.random.seed(seed)
 
+        # TODO: Use progress bar
         for _ in range(self.num_episodes):
             state = self.initial_state
-            action = 0
+            action = BaseNumber(self.m, self.q)
 
             for t in range(self.max_iteration):
-                value = self.get(state, {}).get(action, 0.1)
+                value = self.q_dict.get(state, {}).get(action, 0.1)
                 next_action, next_state, max_value = self.get_best_action_for_state(state)
 
                 # Explore
                 if np.random.rand() < self.epsilon:
-                    next_action: BaseNumber = random_action(self.m, self.q)
+                    next_action: BaseNumber = random_action(self.m, self.q)  # type: ignore
 
                 reward = (next_state == self.end_state) * 1
                 self.q_dict[state][action] = min(value + self.alpha * (reward + self.gamma * max_value - value), 1)
@@ -93,7 +94,7 @@ class QLearning(RLModel):
         states: List[BaseNumber] = [self.initial_state]
         signals = []
         if vector:
-            u = np.zeros(size=(self.time_horizon, self.m))
+            u = np.zeros((self.time_horizon, self.m))
 
         for t in range(1, self.time_horizon):
             action, state, _ = self.get_best_action_for_state(states[t])
