@@ -45,7 +45,7 @@ class Sarsa(RLModel):
         self.n_steps = n_steps
 
         self.q_dict: Dict[Any, Any] = {-1: {}}  # TODO: fix typing
-        self.all_possible_action = np.arange(self.q ** self.m)  # TODO: can we do better?
+        self.all_possible_action = np.arange(self.q**self.m)  # TODO: can we do better?
 
     def train(self, seed: Optional[int] = None):
         if seed:
