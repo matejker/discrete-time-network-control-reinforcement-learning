@@ -1,7 +1,8 @@
-from typing import Optional, Dict
+import numpy as np
+from typing import Optional, Dict, Tuple
 
-from network_control_rl_framework.network import Network
 from network_control_rl_framework.algebra import BaseNumber
+from network_control_rl_framework.network import Network, calculate_next_state_base_number
 
 
 class RLModel:
@@ -56,6 +57,24 @@ class RLModel:
 
         if not self.num_episodes:
             raise ValueError()
+
+    def get_best_action_for_state(self, state: BaseNumber) -> Tuple[BaseNumber, BaseNumber, float]:
+        max_value: float = -1.0
+        best_action = BaseNumber(self.m, self.q)
+        next_state = state
+
+        np.random.shuffle(self.all_possible_action)
+        for action in self.all_possible_action:
+            action_base = BaseNumber(self.m, self.q, action)
+            temp_state = calculate_next_state_base_number(self.network, state, action_base, self.input_matrix)
+            value = self.q_dict.get((temp_state.a, action), 0.1)
+
+            if value > max_value:
+                max_value = value
+                best_action = action_base
+                next_state = temp_state
+
+        return best_action, next_state, max_value
 
     def train(self):
         pass
