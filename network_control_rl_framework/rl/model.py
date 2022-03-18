@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Optional, Dict, Tuple
+from typing import Optional, Dict, Tuple, Union, List
 
 from network_control_rl_framework.algebra import BaseNumber
 from network_control_rl_framework.network import Network, calculate_next_state_base_number
@@ -84,3 +84,26 @@ class RLModel:
 
     def __str__(self):
         pass
+
+    def get_signals(self, vector: bool = False) -> Union[List[BaseNumber], np.ndarray]:
+        if len(self.q_dict) < 2:
+            raise ValueError("Tabular values Q are empty, you need to train() the model first.")
+
+        # TODO: rewrite it into np.ndarray
+        states: List[BaseNumber] = [self.initial_state]
+        signals = []
+        if vector:
+            u = np.zeros((self.time_horizon, self.m), dtype=np.int8)
+
+        for t in range(self.time_horizon):
+            action, state, _ = self.get_best_action_for_state(states[t])
+            states.append(state)
+            signals.append(action)
+
+            if vector:
+                u[t] = action.to_array()
+
+        if vector:
+            return u
+        else:
+            return signals
