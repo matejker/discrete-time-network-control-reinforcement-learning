@@ -1,7 +1,8 @@
-from typing import Optional, Dict
+import numpy as np
+from typing import Any, Optional, Dict, Tuple, Union, List
 
-from network_control_rl_framework.network import Network
 from network_control_rl_framework.algebra import BaseNumber
+from network_control_rl_framework.network import Network, calculate_next_state_base_number
 
 
 class RLModel:
@@ -57,6 +58,27 @@ class RLModel:
         if not self.num_episodes:
             raise ValueError()
 
+        self.q_dict: Dict[Any, Any] = {-1: {}}  # TODO: fix typing
+        self.all_possible_action = np.arange(self.q**self.m)  # TODO: can we do better?
+
+    def get_best_action_for_state(self, state: BaseNumber) -> Tuple[BaseNumber, BaseNumber, float]:
+        max_value: float = -1.0
+        best_action = BaseNumber(self.m, self.q)
+        next_state = state
+
+        np.random.shuffle(self.all_possible_action)
+        for action in self.all_possible_action:
+            action_base = BaseNumber(self.m, self.q, action)
+            temp_state = calculate_next_state_base_number(self.network, state, action_base, self.input_matrix)
+            value = self.q_dict.get((temp_state.a, action), 0.1)
+
+            if value > max_value:
+                max_value = value
+                best_action = action_base
+                next_state = temp_state
+
+        return best_action, next_state, max_value
+
     def train(self):
         pass
 
@@ -65,3 +87,26 @@ class RLModel:
 
     def __str__(self):
         pass
+
+    def get_signals(self, vector: bool = False) -> Union[List[BaseNumber], np.ndarray]:
+        if len(self.q_dict) < 2:
+            raise ValueError("Tabular values Q are empty, you need to train() the model first.")
+
+        # TODO: rewrite it into np.ndarray
+        states: List[BaseNumber] = [self.initial_state]
+        signals = []
+        if vector:
+            u = np.zeros((self.time_horizon, self.m), dtype=np.int8)
+
+        for t in range(self.time_horizon):
+            action, state, _ = self.get_best_action_for_state(states[t])
+            states.append(state)
+            signals.append(action)
+
+            if vector:
+                u[t] = action.to_array()
+
+        if vector:
+            return u
+        else:
+            return signals
