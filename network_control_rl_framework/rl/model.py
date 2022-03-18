@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Optional, Dict, Tuple, Union, List
+from typing import Any, Optional, Dict, Tuple, Union, List
 
 from network_control_rl_framework.algebra import BaseNumber
 from network_control_rl_framework.network import Network, calculate_next_state_base_number
@@ -57,6 +57,9 @@ class RLModel:
 
         if not self.num_episodes:
             raise ValueError()
+
+        self.q_dict: Dict[Any, Any] = {-1: {}}  # TODO: fix typing
+        self.all_possible_action = np.arange(self.q**self.m)  # TODO: can we do better?
 
     def get_best_action_for_state(self, state: BaseNumber) -> Tuple[BaseNumber, BaseNumber, float]:
         max_value: float = -1.0

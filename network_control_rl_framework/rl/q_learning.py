@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Any, Optional, Dict
+from typing import Optional, Dict
 
 from network_control_rl_framework.rl.model import RLModel
 from network_control_rl_framework.algebra import BaseNumber
@@ -39,8 +39,6 @@ class QLearning(RLModel):
         self.epsilon = epsilon
         self.gamma = gamma
         self.alpha = alpha
-        self.q_dict: Dict[Any, Any] = {-1: {}}  # TODO: fix typing
-        self.all_possible_action = np.arange(self.q**self.m)  # TODO: can we do better?
 
     def train(self, seed: Optional[int] = None):
         if seed:
