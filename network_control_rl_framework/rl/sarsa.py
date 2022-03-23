@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Optional, Dict
 
-from network_control_rl_framework.rl.model import RLModel
+from network_control_rl_framework.rl.model import RLModel, DEFAULT_VALUE
 from network_control_rl_framework.algebra import BaseNumber
 from network_control_rl_framework.rl.policy import random_action
 from network_control_rl_framework.progress_bar import progress_bar_simple
@@ -56,13 +56,13 @@ class Sarsa(RLModel):
             action = BaseNumber(self.m, self.q)
 
             for t in range(self.max_iteration):
-                value = self.q_dict.get((state.a, action.a), 0.1)
+                value = self.q_dict.get((state.a, action.a), DEFAULT_VALUE)
 
                 # Explore
                 if np.random.rand() < self.epsilon:
                     next_action: BaseNumber = random_action(self.q, self.m)  # type: ignore
                     nest_state = calculate_next_state_base_number(self.network, state, next_action, self.input_matrix)
-                    next_value = self.q_dict.get((nest_state.a, nest_state.a), 0.1)
+                    next_value = self.q_dict.get((nest_state.a, nest_state.a), DEFAULT_VALUE)
 
                 # Exploit
                 else:

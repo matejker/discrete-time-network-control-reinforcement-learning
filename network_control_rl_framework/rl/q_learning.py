@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Optional, Dict
 
-from network_control_rl_framework.rl.model import RLModel
+from network_control_rl_framework.rl.model import RLModel, DEFAULT_VALUE
 from network_control_rl_framework.algebra import BaseNumber
 from network_control_rl_framework.rl.policy import random_action
 from network_control_rl_framework.progress_bar import progress_bar_simple
@@ -52,7 +52,7 @@ class QLearning(RLModel):
             action = BaseNumber(self.m, self.q)
 
             for t in range(self.max_iteration):
-                value = self.q_dict.get((state.a, action.a), 0.1)
+                value = self.q_dict.get((state.a, action.a), DEFAULT_VALUE)
                 next_action, next_state, max_value = self.get_best_action_for_state(state)
 
                 # Explore

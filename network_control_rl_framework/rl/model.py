@@ -4,6 +4,8 @@ from typing import Any, Optional, Dict, Tuple, Union, List
 from network_control_rl_framework.algebra import BaseNumber
 from network_control_rl_framework.network import Network, calculate_next_state_base_number
 
+DEFAULT_VALUE = 0.1
+
 
 class RLModel:
     def __init__(
@@ -70,7 +72,7 @@ class RLModel:
         for action in self.all_possible_action:
             action_base = BaseNumber(self.m, self.q, action)
             temp_state = calculate_next_state_base_number(self.network, state, action_base, self.input_matrix)
-            value = self.q_dict.get((temp_state.a, action), 0.1)
+            value = self.q_dict.get((temp_state.a, action), DEFAULT_VALUE)
 
             if value > max_value:
                 max_value = value
