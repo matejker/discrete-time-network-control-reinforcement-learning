@@ -60,7 +60,9 @@ class QLearning(RLModel):
                     next_action: BaseNumber = random_action(self.q, self.m)  # type: ignore
 
                 reward = (next_state == self.end_state) * 1
-                self.q_dict[state.a, action.a] = min(value + self.alpha * (reward + self.gamma * max_value - value), 1)
+                self.q_dict[state.a, action.a] = min(
+                    value + self.alpha * (reward + self.gamma * max_value - value), DEFAULT_VALUE
+                )
 
                 state = next_state
                 action = next_action
