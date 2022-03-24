@@ -31,7 +31,7 @@ class RLModel:
             )
 
         self.network = network
-        self.time_horizon = network.nodes
+        self.time_horizon = float("INF")
 
         if network.nodes != initial_state.n or initial_state.n != end_state.n or end_state.n != network.nodes:
             raise ValueError(
@@ -81,14 +81,15 @@ class RLModel:
 
         return best_action, next_state, max_value
 
+    def is_trained(self) -> bool:
+        return self.time_horizon <= self.network.nodes
+
     def train(self):
         pass
 
-    def __repr__(self):
-        pass
-
-    def __str__(self):
-        pass
+    def __repr__(self) -> str:
+        trained = f"yes, time_horizon={self.time_horizon}" if self.is_trained() else "not yet"
+        return f"{self.__class__}(trained={trained})"
 
     def get_signals(self, vector: bool = False) -> Union[List[BaseNumber], np.ndarray]:
         if len(self.q_dict) < 2:
@@ -97,10 +98,11 @@ class RLModel:
         # TODO: rewrite it into np.ndarray
         states: List[BaseNumber] = [self.initial_state]
         signals = []
+        time_horizon = int(min(self.network.nodes, self.time_horizon))
         if vector:
-            u = np.zeros((self.time_horizon, self.m), dtype=np.int8)
+            u = np.zeros((time_horizon, self.m), dtype=np.int8)
 
-        for t in range(self.time_horizon):
+        for t in range(time_horizon):
             action, state, _ = self.get_best_action_for_state(states[t])
             states.append(state)
             signals.append(action)
