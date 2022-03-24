@@ -1,3 +1,3 @@
-from .network import Network, WeightedNetwork
+from .network import Network, WeightedNetwork, NetworkValueError
 from .configuration_models import erdos_renyi_random_network, barabasi_albert_preferential_attachment_network
 from .states import calculate_next_state, calculate_next_state_base_number
