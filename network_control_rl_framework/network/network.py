@@ -45,6 +45,9 @@ class Network:
         self.edges = set(edges)
         self.edge_basket = self.get_edge_basket(edges)
 
+    def __repr__(self) -> str:
+        return f"Network(nodes={self.nodes}, num_edges={len(self.edges)})"
+
 
 class WeightedNetwork(Network):
     def __init__(self, edges: List[Tuple] = [], n: int = 0):
@@ -63,3 +66,6 @@ class WeightedNetwork(Network):
         self.nodes = max_node
         self.edges = set(edges)
         self.edge_basket = self.get_edge_basket(edges, weighted=True)
+
+    def __repr__(self) -> str:
+        return f"WeightedNetwork(nodes={self.nodes}, num_edges={len(self.edges)})"
