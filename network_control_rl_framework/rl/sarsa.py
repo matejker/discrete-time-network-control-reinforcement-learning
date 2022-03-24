@@ -108,3 +108,7 @@ class Sarsa(RLModel):
             if eps % coef == 0:
                 progress_bar_simple(eps, self.num_episodes, prefix="Progress:", suffix="Complete", length=50)
         progress_bar_simple(self.num_episodes, self.num_episodes, prefix="Progress:", suffix="Complete", length=50)
+
+    def __repr__(self) -> str:
+        trained = f"yes, time_horizon={self.time_horizon}" if self.is_trained() else "not yet"
+        return f"Sarsa(trained={trained})"
