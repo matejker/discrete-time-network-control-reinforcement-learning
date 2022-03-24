@@ -47,3 +47,10 @@ def test_base_number_array_convert():
     assert a.a == 8
     assert a.n == 4
     assert a.q == 2
+
+
+def test_base_number_to_string():
+    a = BaseNumber(3, 16, 33)
+    assert a.to_string() == "021"
+    assert a.__repr__() == "BaseNumber(a=021_16=33_10, n=3, q=16)"
+    assert str(a) == "33"

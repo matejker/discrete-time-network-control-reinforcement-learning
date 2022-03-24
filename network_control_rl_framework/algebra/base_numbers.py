@@ -44,6 +44,9 @@ class BaseNumber:
 
         return array
 
+    def to_string(self) -> str:
+        return "".join([DIGITS[i] for i in self.to_array()])
+
     def __add__(self, other):
         if self.q != other.q:
             raise TypeError(f"The bases aren't the same {self.q=}!={other.q=}")
@@ -75,3 +78,9 @@ class BaseNumber:
 
     def __ne__(self, other) -> bool:
         return not self == other
+
+    def __repr__(self) -> str:
+        return f"BaseNumber(a={self.to_string()}_{self.q}={self.a}_10, n={self.n}, q={self.q})"
+
+    def __str__(self) -> int:
+        return self.a
