@@ -17,10 +17,16 @@ def test_q_learning_training(network_cycle_4):
 
     model = QLearning(initial_state, end_state, network_cycle_4, input_matrix, episodes_factor=13, iteration_factor=2)
 
+    assert model.__repr__() == "QLearning(trained=not yet)"
+    assert not model.is_trained()
+
     with raises(ValueError):
         model.get_signals()
 
     model.train(seed=6)
+
+    assert model.__repr__() == "QLearning(trained=yes, time_horizon=3)"
+    assert model.is_trained()
 
     action_t1 = BaseNumber(1, q, 3)
     action_t2 = BaseNumber(1, q, 0)

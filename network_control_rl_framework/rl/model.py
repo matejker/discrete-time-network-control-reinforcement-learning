@@ -89,7 +89,7 @@ class RLModel:
 
     def __repr__(self) -> str:
         trained = f"yes, time_horizon={self.time_horizon}" if self.is_trained() else "not yet"
-        return f"{self.__class__}(trained={trained})"
+        return f"RLModel(trained={trained})"
 
     def get_signals(self, vector: bool = False) -> Union[List[BaseNumber], np.ndarray]:
         if len(self.q_dict) < 2:
