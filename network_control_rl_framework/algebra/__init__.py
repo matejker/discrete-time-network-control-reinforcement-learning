@@ -1,9 +1,9 @@
 from math import log2
 
 from .primes import PRIMES, POWERS_2
-from .finite_field import FiniteField as _FiniteField
+from .finite_field import FiniteField as _FiniteField, FiniteFieldValueError
 from .binary_finite_field import BinaryFiniteField
-from .base_numbers import BaseNumber, DIGITS
+from .base_numbers import BaseNumber, DIGITS, BaseNumberTypeError, BaseNumberValueError
 
 
 class FiniteField:
@@ -17,4 +17,4 @@ class FiniteField:
             self.__class__ = BinaryFiniteField  # type: ignore
             self.__init__(a, p)  # type: ignore
         else:
-            raise ValueError(f"{p} is neither of prime {PRIMES} or prime factor of 2 {POWERS_2}")
+            raise FiniteFieldValueError(f"{p} is neither of prime {PRIMES} or prime factor of 2 {POWERS_2}")

@@ -7,15 +7,23 @@ POSSIBLE_BASES = set(PRIMES + POWERS_2)
 DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
 
 
+class BaseNumberTypeError(TypeError):
+    pass
+
+
+class BaseNumberValueError(ValueError):
+    pass
+
+
 # TODO: think about hex()
 # https://www.journaldev.com/22902/python-hex
 class BaseNumber:
     def __init__(self, n: int, q: int, a: int = 0) -> None:
         if q not in POSSIBLE_BASES:
-            raise ValueError(f"Cannot evaluate finite field of order {q}, expected value {POSSIBLE_BASES}")
+            raise BaseNumberValueError(f"Cannot evaluate finite field of order {q}, expected value {POSSIBLE_BASES}")
 
         if a > 0 and n < log2(a) / log2(q):
-            raise ValueError(
+            raise BaseNumberValueError(
                 f"Number {a} in {q} base is larger than number of position {n}, max possible value {q ** n - 1}"
             )
 
@@ -49,10 +57,10 @@ class BaseNumber:
 
     def __add__(self, other):
         if self.q != other.q:
-            raise TypeError(f"The bases aren't the same {self.q=}!={other.q=}")
+            raise BaseNumberTypeError(f"The bases aren't the same {self.q=}!={other.q=}")
 
         if self.n != other.n:
-            raise TypeError(f"The lengths aren't the same {self.n=}!={other.n=}")
+            raise BaseNumberTypeError(f"The lengths aren't the same {self.n=}!={other.n=}")
 
         a = self.to_array()
         b = other.to_array()
@@ -60,10 +68,10 @@ class BaseNumber:
 
     def __sub__(self, other):
         if self.q != other.q:
-            raise TypeError(f"The bases aren't the same {self.q=}!={other.q}")
+            raise BaseNumberTypeError(f"The bases aren't the same {self.q=}!={other.q}")
 
         if self.n != other.n:
-            raise TypeError(f"The lengths aren't the same {self.n=}!={other.n}")
+            raise BaseNumberTypeError(f"The lengths aren't the same {self.n=}!={other.n}")
 
         a = self.to_array()
         b = other.to_array()

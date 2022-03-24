@@ -2,7 +2,7 @@ import numpy as np
 from typing import Optional
 from itertools import combinations, product
 
-from .network import Network
+from .network import Network, NetworkValueError
 from network_control_rl_framework.utils import random_choice
 
 
@@ -55,10 +55,10 @@ def barabasi_albert_preferential_attachment_network(
     m0 = m0 or m
 
     if m0 < m:
-        raise ValueError(f"Inserted values are not correct, m <= m0, m={m} and m0={m0}")
+        raise NetworkValueError(f"Inserted values are not correct, m <= m0, m={m} and m0={m0}")
 
     if n < m0:
-        raise ValueError(f"Inserted values are not correct, n => m0, m0={m0} and n={n}")
+        raise NetworkValueError(f"Inserted values are not correct, n => m0, m0={m0} and n={n}")
 
     # Initial complete graph
     edges = list(combinations(list(range(m0)), 2))

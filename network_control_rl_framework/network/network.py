@@ -2,6 +2,10 @@ from typing import List, Tuple, Dict
 from network_control_rl_framework.utils import is_int, is_float
 
 
+class NetworkValueError(ValueError):
+    pass
+
+
 class Network:
     @staticmethod
     def get_edge_basket(edges: List[Tuple], weighted: bool = False) -> Dict:
@@ -10,26 +14,27 @@ class Network:
         if weighted:
             for i, j, w in edges:
                 if not is_int(i) or not is_int(j):
-                    raise ValueError(f"Nodes have to be integers, ({i}, {j}) are not")
+                    raise NetworkValueError(f"Nodes have to be integers, ({i}, {j}) are not")
 
                 # TODO: this is not float, this has to be element of a finite field
                 if not is_float(w):
-                    raise ValueError(f"Weight has to be float, {w} is not")
+                    raise NetworkValueError(f"Weight has to be float, {w} is not")
 
                 basket[i] = basket.get(i, []) + [(j, w)]
         else:
             for i, j in edges:
                 if not is_int(i) or not is_int(j):
-                    raise ValueError(f"Nodes have to be integers, ({i}, {j}) are not")
+                    raise NetworkValueError(f"Nodes have to be integers, ({i}, {j}) are not")
 
                 basket[i] = basket.get(i, []) + [j]
 
         return basket
 
-    def __init__(self, edges: List[Tuple] = [], n: int = 0):
+    def __init__(self, edges: List[Tuple] = [], n: int = 0, weighted: bool = False):
         self.nodes = n
         self.edges = set(edges)
-        self.edge_basket = self.get_edge_basket(edges)
+        self.weighted = weighted
+        self.edge_basket = self.get_edge_basket(edges, weighted=self.weighted)
 
     def from_edges(self, edges: List[Tuple]):
         max_node = 0
@@ -51,7 +56,7 @@ class Network:
 
 class WeightedNetwork(Network):
     def __init__(self, edges: List[Tuple] = [], n: int = 0):
-        super().__init__(edges, n)
+        super().__init__(edges, n, weighted=True)
 
     def from_edges(self, edges: List[Tuple]):
         max_node = 0

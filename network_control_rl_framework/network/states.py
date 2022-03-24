@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Dict
 
-from network_control_rl_framework.network import Network
+from network_control_rl_framework.network.network import Network, NetworkValueError
 from network_control_rl_framework.algebra import BaseNumber, FiniteField
 
 """ Modular Arithmetic and the Distributive Property
@@ -15,7 +15,7 @@ def calculate_next_state(
     n = len(x)
 
     if n != network.nodes:
-        raise ValueError(f"Length of state vector x and number of nodes doesn't match, {n}!={network.nodes}")
+        raise NetworkValueError(f"Length of state vector x and number of nodes doesn't match, {n}!={network.nodes}")
 
     new_x = np.zeros(n, dtype=np.int8)
     for node, neighbours in network.edge_basket.items():
@@ -36,7 +36,7 @@ def calculate_next_state_base_number(
     x = number.to_array()
 
     if n != network.nodes:
-        raise ValueError(f"Length of state vector x and number of nodes doesn't match, {n}!={network.nodes}")
+        raise NetworkValueError(f"Length of state vector x and number of nodes doesn't match, {n}!={network.nodes}")
 
     new_x = np.zeros(n, dtype=np.int8)
     for node, neighbours in network.edge_basket.items():

@@ -2,6 +2,7 @@ import pytest
 
 from network_control_rl_framework.network import (
     Network,
+    NetworkValueError,
     erdos_renyi_random_network,
     barabasi_albert_preferential_attachment_network,
 )
@@ -44,8 +45,8 @@ def test_barabasi_albert_preferential_attachment_network():
 
 
 def test_barabasi_albert_preferential_attachment_network_incorrect_parameters():
-    with pytest.raises(ValueError):
+    with pytest.raises(NetworkValueError):
         barabasi_albert_preferential_attachment_network(n=5, m=2, m0=1, seed=16)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(NetworkValueError):
         barabasi_albert_preferential_attachment_network(n=1, m=2, m0=2, seed=16)
