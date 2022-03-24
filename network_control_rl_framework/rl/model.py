@@ -7,6 +7,10 @@ from network_control_rl_framework.network import Network, calculate_next_state_b
 DEFAULT_VALUE = 0.1
 
 
+class RLModelValueError(ValueError):
+    pass
+
+
 class RLModel:
     def __init__(
         self,
@@ -25,7 +29,7 @@ class RLModel:
         self.m: int = len(input_matrix)  # Number of driver nodes
 
         if initial_state.q != end_state.q:
-            raise ValueError(
+            raise RLModelValueError(
                 f"Base / Finite Field order has to be the same for both "
                 f"initial and end state, {initial_state.q}!={end_state.q}"
             )
@@ -34,7 +38,7 @@ class RLModel:
         self.time_horizon = float("INF")
 
         if network.nodes != initial_state.n or initial_state.n != end_state.n or end_state.n != network.nodes:
-            raise ValueError(
+            raise RLModelValueError(
                 f"Size of network, initial and end state has to be the same, "
                 f"{network.nodes=}, {initial_state.n=}, {end_state.n=}"
             )

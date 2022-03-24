@@ -1,7 +1,7 @@
 import numpy as np
 from pytest import raises
 
-from network_control_rl_framework.rl import RLModel
+from network_control_rl_framework.rl import RLModel, RLModelValueError
 from network_control_rl_framework.algebra import BaseNumber
 
 
@@ -35,7 +35,7 @@ def test_rl_model_object_init_exception(network_cycle_4):
     end_state = BaseNumber(n, q)
     end_state.from_array(np.array([1, 3, 2, 1]))
 
-    with raises(ValueError):
+    with raises(RLModelValueError):
         RLModel(initial_state, end_state, network_cycle_4, input_matrix, episodes_factor=13, iteration_factor=2)
 
     # Sizes don't match
@@ -44,5 +44,5 @@ def test_rl_model_object_init_exception(network_cycle_4):
     end_state = BaseNumber(n + 1, q)
     end_state.from_array(np.array([1, 3, 2, 1, 2]))
 
-    with raises(ValueError):
+    with raises(RLModelValueError):
         RLModel(initial_state, end_state, network_cycle_4, input_matrix, episodes_factor=13, iteration_factor=2)
