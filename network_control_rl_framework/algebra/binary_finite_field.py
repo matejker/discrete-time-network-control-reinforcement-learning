@@ -1,6 +1,7 @@
 from math import log2
 
 from .primes import IRR_POLYNOMIALS, POWERS_2
+from .finite_field import FiniteFieldValueError
 
 
 class BinaryFiniteField:
@@ -38,7 +39,7 @@ class BinaryFiniteField:
         self.n = int(log2(p))
 
         if p not in POWERS_2:
-            raise ValueError(f"Cannot evaluate finite field of order {p}, expected value {POWERS_2}")
+            raise FiniteFieldValueError(f"Cannot evaluate finite field of order {p}, expected value {POWERS_2}")
 
         self.r = r or IRR_POLYNOMIALS[self.n - 1]
 
