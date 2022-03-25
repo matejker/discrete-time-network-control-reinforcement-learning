@@ -39,7 +39,7 @@ class RLModel:
 
         if network.nodes != initial_state.n or initial_state.n != end_state.n or end_state.n != network.nodes:
             raise RLModelValueError(
-                f"Size of network, initial and end state has to be the same, "
+                f"Size of the network, initial and end state has to be the same, "
                 f"{network.nodes=}, {initial_state.n=}, {end_state.n=}"
             )
 
