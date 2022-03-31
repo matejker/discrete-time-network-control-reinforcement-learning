@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Network control using Reinforcement Learning"
+name = "network_control_rl"
 version = "1.0.0"
 description = "Controlling complex (directed) networks using Reinforcement Learning frameworks"
 authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
