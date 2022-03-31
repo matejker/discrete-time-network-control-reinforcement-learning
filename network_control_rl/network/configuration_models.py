@@ -3,7 +3,7 @@ from typing import Optional
 from itertools import combinations, product
 
 from .network import Network, NetworkValueError
-from network_control_rl_framework.utils import random_choice
+from network_control_rl.utils import random_choice
 
 
 def erdos_renyi_random_network(

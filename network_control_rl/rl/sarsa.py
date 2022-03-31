@@ -1,11 +1,11 @@
 import numpy as np
 from typing import Optional, Dict
 
-from network_control_rl_framework.rl.model import RLModel, DEFAULT_VALUE
-from network_control_rl_framework.algebra import BaseNumber
-from network_control_rl_framework.rl.policy import random_action
-from network_control_rl_framework.progress_bar import progress_bar_simple
-from network_control_rl_framework.network import Network, calculate_next_state_base_number
+from network_control_rl.rl.model import RLModel, DEFAULT_VALUE
+from network_control_rl.algebra import BaseNumber
+from network_control_rl.rl.policy import random_action
+from network_control_rl.progress_bar import progress_bar_simple
+from network_control_rl.network import Network, calculate_next_state_base_number
 
 
 class Sarsa(RLModel):

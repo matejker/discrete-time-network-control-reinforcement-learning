@@ -21,7 +21,7 @@ test: requirements_tools
 
 .PHONY: coverage
 coverage:
-	poetry run pytest --cov network_control_rl_framework --cov-fail-under=$(MIN_COVERAGE) $(TEST_ONLY)
+	poetry run pytest --cov network_control_rl --cov-fail-under=$(MIN_COVERAGE) $(TEST_ONLY)
 
 .PHONY: format
 format: requirements_tools
@@ -29,7 +29,7 @@ format: requirements_tools
 
 .PHONY: typecheck
 typecheck: requirements_tools
-	poetry run mypy tests network_control_rl_framework
+	poetry run mypy tests network_control_rl
 
 .PHONY: notebook
 notebook: requirements_tools

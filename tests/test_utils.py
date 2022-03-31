@@ -1,4 +1,4 @@
-from network_control_rl_framework.utils import is_int, is_float
+from network_control_rl.utils import is_int, is_float
 
 
 def test_is_int():

@@ -1,8 +1,8 @@
 import numpy as np
 from pytest import raises
 
-from network_control_rl_framework.rl import random_action
-from network_control_rl_framework.algebra import BaseNumber
+from network_control_rl.rl import random_action
+from network_control_rl.algebra import BaseNumber
 
 
 def test_random_action_q_n():

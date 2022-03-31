@@ -1,8 +1,8 @@
 import numpy as np
 from pytest import raises
 
-from network_control_rl_framework.rl import Sarsa
-from network_control_rl_framework.algebra import BaseNumber
+from network_control_rl.rl import Sarsa
+from network_control_rl.algebra import BaseNumber
 
 
 def test_sarsa_training(network_cycle_4):

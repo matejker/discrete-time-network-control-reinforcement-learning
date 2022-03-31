@@ -1,12 +1,11 @@
 [tool.poetry]
-name = "Network control using Reinforcement Learning"
-version = "0.1.0"
+name = "network_control_rl"
+version = "1.0.0"
 description = "Controlling complex (directed) networks using Reinforcement Learning frameworks"
 authors = ["Matej Kerekrety <matej.kerekrety@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-notebook = "^6.4.8"
 numpy = "^1.22.2"
 
 [tool.poetry.dev-dependencies]
@@ -16,6 +15,7 @@ black = "^22.1.0"
 mypy = "^0.931"
 bandit = "^1.7.3"
 pytest-cov = "^3.0.0"
+notebook = "^6.4.10"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -1,8 +1,8 @@
 import pytest
 
-from network_control_rl_framework.algebra import FiniteField, FiniteFieldValueError
-from network_control_rl_framework.algebra.finite_field import FiniteField as ff
-from network_control_rl_framework.algebra.binary_finite_field import BinaryFiniteField as bff
+from network_control_rl.algebra import FiniteField, FiniteFieldValueError
+from network_control_rl.algebra.finite_field import FiniteField as ff
+from network_control_rl.algebra.binary_finite_field import BinaryFiniteField as bff
 
 
 def test_incorrect_init_finite_field():

@@ -1,6 +1,6 @@
 import pytest
 
-from network_control_rl_framework.algebra import BinaryFiniteField
+from network_control_rl.algebra import BinaryFiniteField
 
 
 def test_incorrect_power_of_2():

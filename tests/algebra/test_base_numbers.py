@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from network_control_rl_framework.algebra import BaseNumber, BaseNumberTypeError, BaseNumberValueError
+from network_control_rl.algebra import BaseNumber, BaseNumberTypeError, BaseNumberValueError
 
 
 def test_base_number_incorrect_init():
