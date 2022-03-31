@@ -49,6 +49,8 @@ make typecheck  # runs mypy
 make test  # runs unit [py]tests
 ```
 
+We are using [Poetry](https://python-poetry.org/).
+
 ## References 
 [1] Sutton, R. S., & Barto, A. G. (2018), _"Reinforcement Learning: An Introduction"_, The MIT Press.  
 [2] Newman, M. E. J. (2010), _"Networks: an introduction"_, Oxford University Press, Oxford; New York  
