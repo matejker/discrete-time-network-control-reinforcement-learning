@@ -1,6 +1,6 @@
 import pytest
 
-from network_control_rl_framework.network import (
+from network_control_rl.network import (
     Network,
     NetworkValueError,
     erdos_renyi_random_network,

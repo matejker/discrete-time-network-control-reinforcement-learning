@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Optional, Union
 
-from network_control_rl_framework.algebra import DIGITS, BaseNumber
+from network_control_rl.algebra import DIGITS, BaseNumber
 
 
 def random_action(

@@ -1,8 +1,8 @@
 import pytest
 import numpy as np
 
-from network_control_rl_framework.algebra import BaseNumber
-from network_control_rl_framework.network import calculate_next_state_base_number, calculate_next_state
+from network_control_rl.algebra import BaseNumber
+from network_control_rl.network import calculate_next_state_base_number, calculate_next_state
 
 
 def test_calculate_next_state(network_cycle_4):

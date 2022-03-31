@@ -1,8 +1,8 @@
 import numpy as np
 from typing import Any, Optional, Dict, Tuple, Union, List
 
-from network_control_rl_framework.algebra import BaseNumber
-from network_control_rl_framework.network import Network, calculate_next_state_base_number
+from network_control_rl.algebra import BaseNumber
+from network_control_rl.network import Network, calculate_next_state_base_number
 
 DEFAULT_VALUE = 0.1
 

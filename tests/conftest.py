@@ -1,6 +1,6 @@
 import pytest
 
-from network_control_rl_framework.network import Network
+from network_control_rl.network import Network
 
 
 @pytest.fixture()

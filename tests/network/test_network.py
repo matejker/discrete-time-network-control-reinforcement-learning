@@ -1,6 +1,6 @@
 import pytest
 
-from network_control_rl_framework.network import Network, WeightedNetwork, NetworkValueError
+from network_control_rl.network import Network, WeightedNetwork, NetworkValueError
 
 
 def test_network():

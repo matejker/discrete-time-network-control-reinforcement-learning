@@ -1,5 +1,5 @@
 from typing import List, Tuple, Dict
-from network_control_rl_framework.utils import is_int, is_float
+from network_control_rl.utils import is_int, is_float
 
 
 class NetworkValueError(ValueError):

@@ -1,8 +1,8 @@
 import numpy as np
 from pytest import raises
 
-from network_control_rl_framework.rl import RLModel, RLModelValueError
-from network_control_rl_framework.algebra import BaseNumber
+from network_control_rl.rl import RLModel, RLModelValueError
+from network_control_rl.algebra import BaseNumber
 
 
 def test_rl_model_object_init(network_cycle_4):

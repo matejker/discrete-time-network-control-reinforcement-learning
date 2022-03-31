@@ -1,8 +1,8 @@
 import numpy as np
 from typing import Dict
 
-from network_control_rl_framework.network.network import Network, NetworkValueError
-from network_control_rl_framework.algebra import BaseNumber, FiniteField
+from network_control_rl.network.network import Network, NetworkValueError
+from network_control_rl.algebra import BaseNumber, FiniteField
 
 """ Modular Arithmetic and the Distributive Property
     (a + b) mod c = ((a mod c) + (b mod c)) mod c
